@@ -3,7 +3,6 @@ from flask_socketio import SocketIO,emit
 import collections
 
 
-#logging.basicConfig(filename=r'C:\Users\bhoos003\SAI\sai-lab\rtgdb-dashboard\venv\Logs\rtgdb_python.log', level=logging.INFO, format='%(asctime)s %(message)s')
 app = Flask(__name__, static_url_path='/Static')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 socketio=SocketIO(app)
