@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!---Bootstrap Declaration and requirements------->
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<title>Virtual Queue</title>
+</head>
+<style>
+p {text-align: center;}
+.top-buffer { margin-top:20px; }
+.center { margin-left:45%;}
+
+</style>
+<script type="text/javascript">
+	function remove(x){
+	var row={};
+	row['remove']=x;
+	$.ajax({
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        url: "/remove",
+		async: false,
+        data: JSON.stringify({row}),
+        dataType: "json",
+		success: function (){console.log('success');}
+		});
+		location.reload(true);
+	}
+</script>
+<body>
+	<div class="container">
+		<div class="row top-buffer"><div class="col-lg"><h2><p><strong class="badge badge-primary">Project-Q</strong></p></h2></div></div>
+
+
+				<table class="table">
+					<tr>
+						<th style="text-align: center;">Customer Name</th>
+						<th style="text-align: center;">Customer Phone</th>
+						<th style="text-align: center;">Customer Email</th>
+					</tr>
+					{% for x in virtual_queue%}
+					<tr>
+						<td style="text-align: center;"><h6>{{x.split('+')[0]}}</h6></td>
+						<td style="text-align: center;"><h6>{{x.split('+')[1]}}</h6></td>
+						<td style="text-align: center;"><h6>{{x.split('+')[2]}}</h6></td>
+						<td><button onclick={{"remove("+(virtual_queue.index(x))|string+")"}} class="btn btn-primary btn-sm">delete</button></td>
+					</tr>
+					{% endfor %}
+				</table>
+		<div class="row top-buffer"><div class="col-6">
+		<a href="/"  class="btn btn-primary btn-sm btn-send center">Home</a></div>
+		<div class="col-6">
+		<a href="/JoinQ"  style="display: inline;" class="btn btn-primary btn-sm btn-send center">add</a>
+		</div><div class="col-6"></div></div>
+	</div>
+</body>
+</html>
