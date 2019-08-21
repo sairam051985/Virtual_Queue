@@ -1,0 +1,9 @@
+(1) Virtual Environment setup - \\> virtualenv Q-Project
+(2) Activate VE - \\Q-Project\Scripts>activate.bat 
+(2) Get the required packages - pip install flask ; pip install Flask-SocketIO
+(3) Create flask-project folder structure
+		mkdir Static
+		mkdir templates
+(4)Create a simple flask python script - Q-Project.py
+	
+	
